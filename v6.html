@@ -17,65 +17,106 @@
         .logo{font-family:'Space Mono',monospace;font-weight:700;font-size:.9rem;color:var(--t);}
         .logo .acc{color:var(--a);}
         .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);}
-        .sync-dot.off{background:var(--danger);}
         .tabs{display:flex;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;}
-        .tab{flex:1;min-width:70px;font-family:'Space Mono',monospace;font-size:.65rem;padding:12px 5px;border:none;background:transparent;color:var(--m);cursor:pointer;white-space:nowrap;}
+        .tab{flex:1;min-width:70px;font-family:'Space Mono',monospace;font-size:.62rem;padding:12px 5px;border:none;background:transparent;color:var(--m);cursor:pointer;white-space:nowrap;font-weight:700;}
         .tab.active{color:var(--a);border-bottom:2px solid var(--a);}
         main{padding:14px;max-width:540px;margin:0 auto;}
         .page{display:none;}.page.active{display:block;}
         .sec{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:15px;margin-bottom:12px;}
-        .chat-box{background:var(--s);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;}
-        .chat-msgs{padding:12px;display:flex;flex-direction:column;gap:10px;height:400px;overflow-y:auto;background:var(--bg);}
-        .bmsg{max-width:85%;padding:10px;border-radius:12px;font-size:0.9rem;line-height:1.4;}
+        .sec-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--m);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+        .sec-title span{color:var(--a);}
+        
+        /* TEMPO */
+        .sc-val{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--a);}
+        .hora-row{display:flex;gap:8px;margin-bottom:10px;}
+        .hf{flex:1;}
+        .hf input{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:8px;color:var(--t);padding:8px;outline:none;}
+        
+        /* SALDO */
+        .gasto-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--b);font-size:0.9rem;}
+        .g-val{color:var(--danger);font-weight:700;}
+        
+        /* IA */
+        .chat-msgs{padding:10px;display:flex;flex-direction:column;gap:10px;height:350px;overflow-y:auto;background:var(--bg);border-radius:8px;}
+        .bmsg{max-width:85%;padding:10px;border-radius:12px;font-size:0.85rem;line-height:1.4;}
         .bmsg-ia{align-self:flex-start;background:var(--s2);border:1px solid var(--b);}
-        .bmsg-user{align-self:flex-end;background:var(--a);color:#000;font-weight:500;}
-        .chat-input{display:flex;gap:8px;padding:10px;background:var(--s2);border-top:1px solid var(--b);}
-        .cinp{flex:1;background:var(--s);border:1px solid var(--b);border-radius:8px;color:var(--t);padding:10px;outline:none;}
-        .btn{background:var(--a);color:#000;border:none;border-radius:8px;padding:10px 15px;font-weight:700;cursor:pointer;}
-        .notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ok);color:#000;padding:8px 20px;border-radius:20px;display:none;z-index:100;}
+        .bmsg-user{align-self:flex-end;background:var(--a);color:#000;}
+        .cinp{width:100%;background:var(--s);border:1px solid var(--b);border-radius:8px;color:var(--t);padding:10px;outline:none;}
+        .btn{background:var(--a);color:#000;border:none;border-radius:8px;padding:10px 15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;}
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo">péricles<span class="acc">.app</span></div>
-    <div class="sync-dot" id="sync-dot"></div>
+    <div class="sync-dot"></div>
 </header>
 
 <div class="tabs">
-    <button class="tab active" onclick="go('ia',this)">⚡ Assistente</button>
-    <button class="tab" onclick="go('perfil',this)">👤 Perfil</button>
-    <button class="tab" onclick="go('config',this)">⚙️ Config</button>
+    <button class="tab active" onclick="go('tempo',this)">⏰ Tempo</button>
+    <button class="tab" onclick="go('saldo',this)">💰 Saldo</button>
+    <button class="tab" onclick="go('ia',this)">⚡ IA</button>
+    <button class="tab" onclick="go('perfil',this)">🧠 Perfil</button>
+    <button class="tab" onclick="go('config',this)">⚙️</button>
 </div>
 
 <main>
-    <div class="page active" id="page-ia">
-        <div class="sec" id="key-warning">
-            <p style="color:var(--warn); font-size:0.8rem;">⚠️ Chave da API necessária para conversar.</p>
-            <input type="password" id="api-key-input" class="cinp" style="margin-top:10px; width:100%;" placeholder="sk-ant-...">
-            <button class="btn" style="margin-top:10px; width:100%;" onclick="saveKey()">Salvar Chave</button>
+    <div class="page active" id="page-tempo">
+        <div class="sec">
+            <div class="sec-title"><span>●</span> Horas Livres Hoje</div>
+            <div class="sc-val" id="horas-livres">--:--</div>
         </div>
-        <div class="chat-box">
+        <div class="sec">
+            <div class="sec-title"><span>01</span> Manhã</div>
+            <div class="hora-row">
+                <div class="hf"><input type="time" id="t1-ini" onchange="calcTempo()"></div>
+                <div class="hf"><input type="time" id="t1-fim" onchange="calcTempo()"></div>
+            </div>
+            <div class="sec-title"><span>02</span> Tarde</div>
+            <div class="hora-row">
+                <div class="hf"><input type="time" id="t2-ini" onchange="calcTempo()"></div>
+                <div class="hf"><input type="time" id="t2-fim" onchange="calcTempo()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="page-saldo">
+        <div class="sec">
+            <div class="sec-title"><span>●</span> Saldo Disponível</div>
+            <div class="sc-val" id="saldo-txt" style="color:var(--a2)">R$ 0,00</div>
+        </div>
+        <div class="sec">
+            <div class="sec-title"><span>+</span> Novo Gasto</div>
+            <input type="text" id="g-desc" class="cinp" placeholder="Descrição">
+            <input type="number" id="g-val" class="cinp" style="margin-top:8px" placeholder="Valor">
+            <button class="btn" onclick="addGasto()">Adicionar Gasto</button>
+        </div>
+        <div class="sec" id="gastos-lista"></div>
+    </div>
+
+    <div class="page" id="page-ia">
+        <div class="sec" id="key-area">
+            <div class="sec-title"><span>!</span> API Anthropic</div>
+            <input type="password" id="api-key" class="cinp" placeholder="sk-ant-...">
+            <button class="btn" onclick="saveKey()">Salvar Chave</button>
+        </div>
+        <div class="sec">
             <div class="chat-msgs" id="chat-msgs"></div>
-            <div class="chat-input">
-                <input type="text" id="chat-inp" class="cinp" placeholder="Sua mensagem...">
-                <button class="btn" onclick="sendMsg()">→</button>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+                <input type="text" id="chat-inp" class="cinp" placeholder="Pergunte...">
+                <button class="btn" style="width:50px; margin-top:0;" onclick="sendIA()">→</button>
             </div>
         </div>
     </div>
 
     <div class="page" id="page-perfil">
-        <div class="sec"><h2>O que eu sei sobre você:</h2><div id="perfil-list" style="margin-top:15px;"></div></div>
+        <div class="sec"><div class="sec-title"><span>●</span> Perfil</div><div id="perf-list"></div></div>
     </div>
 
     <div class="page" id="page-config">
-        <div class="sec">
-            <button class="btn" style="background:var(--danger); color:#fff;" onclick="clearData()">Apagar Tudo</button>
-        </div>
+        <div class="sec"><button class="btn" style="background:var(--danger); color:white;" onclick="reset()">Resetar Dados</button></div>
     </div>
 </main>
-
-<div class="notif" id="notif"></div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -92,97 +133,81 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const USER_ID = 'pericles_user';
+    const ID = 'pericles_main';
 
-    let state = { key: '', chat: [], perfil: {} };
+    let state = { key:'', chat:[], gastos:[], perfil:{} };
 
-    // FUNÇÕES DE UI
-    window.go = (id, btn) => {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById('page-' + id).classList.add('active');
-        btn.classList.add('active');
+    window.go = (id, b) => {
+        document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.getElementById('page-'+id).classList.add('active');
+        b.classList.add('active');
     };
 
-    const addMsg = (role, text) => {
-        const div = document.createElement('div');
-        div.className = `bmsg bmsg-${role === 'user' ? 'user' : 'ia'}`;
-        div.textContent = text;
-        document.getElementById('chat-msgs').appendChild(div);
-        document.getElementById('chat-msgs').scrollTop = 9999;
+    // LOGICA TEMPO
+    window.calcTempo = () => {
+        const t1 = (toMin(getValue('t1-fim')) - toMin(getValue('t1-ini')));
+        const t2 = (toMin(getValue('t2-fim')) - toMin(getValue('t2-ini')));
+        const livre = (17*60) - (t1 + t2);
+        document.getElementById('horas-livres').textContent = Math.floor(livre/60)+'h '+(livre%60)+'m';
     };
+    const toMin = t => { if(!t) return 0; const [h,m]=t.split(':').map(Number); return h*60+m; };
+    const getValue = id => document.getElementById(id).value;
 
-    // BANCO DE DADOS
-    async function loadData() {
-        const snap = await getDoc(doc(db, 'usuarios', USER_ID));
-        if (snap.exists()) {
-            state = { ...state, ...snap.data() };
-            if (state.key) document.getElementById('key-warning').style.display = 'none';
-            state.chat.forEach(m => addMsg(m.role, m.content));
-            renderPerfil();
-        } else {
-            addMsg('ia', 'Oi Péricles! Insira sua chave acima para começarmos.');
-        }
+    // LOGICA SALDO
+    window.addGasto = async () => {
+        const d = getValue('g-desc'), v = parseFloat(getValue('g-val'));
+        if(!d || !v) return;
+        state.gastos.unshift({d, v, id:Date.now()});
+        await save(); renderGastos();
+    };
+    function renderGastos() {
+        const l = document.getElementById('gastos-lista');
+        l.innerHTML = state.gastos.map(g=>`<div class="gasto-item"><span>${g.d}</span><span class="g-val">R$ ${g.v.toFixed(2)}</span></div>`).join('');
+        const total = state.gastos.reduce((s,g)=>s+g.v, 0);
+        document.getElementById('saldo-txt').textContent = `Total: R$ ${total.toFixed(2)}`;
     }
 
+    // LOGICA IA
     window.saveKey = async () => {
-        const val = document.getElementById('api-key-input').value;
-        if (!val) return;
-        state.key = val;
-        await setDoc(doc(db, 'usuarios', USER_ID), state);
-        document.getElementById('key-warning').style.display = 'none';
-        alert("Chave salva!");
+        state.key = getValue('api-key');
+        await save(); document.getElementById('key-area').style.display='none';
     };
-
-    window.sendMsg = async () => {
+    window.sendIA = async () => {
         const inp = document.getElementById('chat-inp');
-        const msg = inp.value.trim();
-        if (!msg || !state.key) return;
-
-        inp.value = '';
-        addMsg('user', msg);
-        state.chat.push({ role: 'user', content: msg });
-
+        const m = inp.value; if(!m || !state.key) return;
+        inp.value = ''; addM('user', m); state.chat.push({role:'user', content:m});
+        
         try {
-            const res = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': state.key,
-                    'anthropic-version': '2023-06-01',
-                    'anthropic-dangerous-allow-browser': 'true'
-                },
-                body: JSON.stringify({
-                    model: 'claude-3-haiku-20240307',
-                    max_tokens: 300,
-                    system: "Você é o assistente pessoal do Péricles. Seja direto e amigável.",
-                    messages: state.chat
-                })
+            const r = await fetch('https://api.anthropic.com/v1/messages', {
+                method:'POST',
+                headers:{'Content-Type':'application/json','x-api-key':state.key,'anthropic-version':'2023-06-01','anthropic-dangerous-allow-browser':'true'},
+                body:JSON.stringify({model:'claude-3-haiku-20240307', max_tokens:300, messages:state.chat})
             });
-
-            const data = await res.json();
-            const reply = data.content[0].text;
-            addMsg('ia', reply);
-            state.chat.push({ role: 'assistant', content: reply });
-            await setDoc(doc(db, 'usuarios', USER_ID), state);
-        } catch (e) {
-            addMsg('ia', 'Erro ao conectar. Verifique sua chave.');
-        }
+            const d = await r.json();
+            const txt = d.content[0].text;
+            addM('ia', txt); state.chat.push({role:'assistant', content:txt});
+            await save();
+        } catch(e) { addM('ia', 'Erro na API.'); }
     };
-
-    function renderPerfil() {
-        const list = document.getElementById('perfil-list');
-        list.innerHTML = Object.entries(state.perfil).map(([k, v]) => `<div><b>${k}:</b> ${v}</div>`).join('');
+    function addM(r, t) {
+        const d = document.createElement('div'); d.className=`bmsg bmsg-${r==='user'?'user':'ia'}`;
+        d.textContent = t; document.getElementById('chat-msgs').appendChild(d);
+        document.getElementById('chat-msgs').scrollTop = 9999;
     }
 
-    window.clearData = async () => {
-        if(confirm("Apagar tudo?")) {
-            await setDoc(doc(db, 'usuarios', USER_ID), { key: '', chat: [], perfil: {} });
-            location.reload();
+    async function save() { await setDoc(doc(db, 'usuarios', ID), state); }
+    async function init() {
+        const s = await getDoc(doc(db, 'usuarios', ID));
+        if(s.exists()) {
+            state = {...state, ...s.data()};
+            if(state.key) document.getElementById('key-area').style.display='none';
+            state.chat.forEach(m=>addM(m.role, m.content));
+            renderGastos();
         }
-    };
-
-    loadData();
+    }
+    window.reset = () => { if(confirm("Apagar tudo?")) { setDoc(doc(db, 'usuarios', ID), {key:'',chat:[],gastos:[],perfil:{}}); location.reload(); }};
+    init();
 </script>
 </body>
 </html>
