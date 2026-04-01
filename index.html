@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Péricles ⚡</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080a0d;--s:#0f1218;--s2:#161b22;--b:#1e2530;--b2:#2a3340;
+  --a:#00e5ff;--a2:#ff6b35;--t:#e8edf2;--m:#5a6a7a;
+  --ok:#7fff6b;--warn:#ffcc00;--danger:#ff4444;--r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;min-height:100vh;}
+header{background:var(--s);border-bottom:1px solid var(--b);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;}
+.logo{font-family:'Space Mono',monospace;font-weight:700;font-size:.9rem;color:var(--t);}
+.logo .acc{color:var(--a);}
+.header-right{display:flex;align-items:center;gap:8px;}
+.clk{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--m);background:var(--s2);border:1px solid var(--b);padding:4px 10px;border-radius:100px;}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex-shrink:0;}
+.sync-dot.off{background:var(--danger);}
+.sync-dot.loading{background:var(--warn);animation:pulse .8s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tabs{display:flex;background:var(--s);border-bottom:1px solid var(--b);}
+.tab{flex:1;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;padding:11px 4px;border:none;background:transparent;color:var(--m);cursor:pointer;transition:all .15s;}
+.tab.active{color:var(--a);border-bottom:2px solid var(--a);}
+main{padding:14px;max-width:540px;margin:0 auto;}
+.page{display:none;}.page.active{display:block;animation:fu .2s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.saldo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.sc.time::before{background:linear-gradient(90deg,var(--a),transparent);}
+.sc.money::before{background:linear-gradient(90deg,var(--a2),transparent);}
+.sc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.sc-val{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;line-height:1;}
+.sc-val.time{color:var(--a);}
+.sc-val.money{color:var(--a2);}
+.sc-sub{font-size:.7rem;color:var(--m);margin-top:4px;}
+.sc-bar{height:3px;background:var(--b2);border-radius:100px;margin-top:8px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:100px;transition:width .5s;}
+.sc-fill.time{background:var(--a);}
+.sc-fill.money{background:var(--a2);}
+.sec{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;margin-bottom:10px;}
+.sec-title{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.sec-title span{color:var(--a);}
+.bloco{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;}
+.bchip{flex-shrink:0;width:88px;background:var(--s2);border:1.5px solid var(--b);border-radius:10px;padding:10px 6px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:4px;user-select:none;}
+.bchip.on{background:#0a1a1e;border-color:var(--a);}
+.bchip .ic{font-size:1.2rem;}
+.bchip .lb{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--m);text-align:center;line-height:1.3;font-weight:700;}
+.bchip.on .lb{color:var(--a);}
+.bpanel{flex:1;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:10px;transition:opacity .2s;}
+.bpanel.off{opacity:.3;pointer-events:none;}
+.hora-row{display:flex;gap:6px;margin-bottom:8px;}
+.hf{flex:1;}
+.hf label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
+.hf input[type=time]{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:7px 8px;outline:none;transition:border-color .2s;}
+.hf input[type=time]:focus{border-color:var(--a);}
+.rating{display:flex;gap:4px;}
+.ropt{flex:1;background:var(--bg);border:1px solid var(--b);border-radius:6px;padding:5px 3px;text-align:center;font-size:.66rem;font-weight:700;font-family:'Space Mono',monospace;color:var(--m);cursor:pointer;transition:all .15s;user-select:none;}
+.ropt.sel-ruim{background:#1a0808;border-color:var(--danger);color:var(--danger);}
+.ropt.sel-medio{background:#1a1408;border-color:var(--warn);color:var(--warn);}
+.ropt.sel-bom{background:#081a08;border-color:var(--ok);color:var(--ok);}
+.extra-inp{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:7px 8px;outline:none;margin-top:7px;}
+.rec{background:linear-gradient(135deg,#0a1218,var(--s));border:1px solid var(--a);border-radius:var(--r);padding:15px;margin-bottom:13px;display:none;}
+.rec.show{display:block;animation:fu .3s ease;}
+.rec-h{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+.rec-av{width:30px;height:30px;background:var(--a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;color:#000;}
+.rec-tit{font-family:'Space Mono',monospace;font-weight:700;font-size:.76rem;color:var(--a);}
+.rec-sub{font-size:.67rem;color:var(--m);}
+.task-list{display:flex;flex-direction:column;gap:7px;margin-top:8px;}
+.task{display:flex;gap:9px;background:var(--s2);border:1px solid var(--b);border-radius:9px;padding:9px 11px;}
+.task-n{font-family:'Space Mono',monospace;font-weight:700;color:var(--a);font-size:.86rem;flex-shrink:0;}
+.task-body{font-size:.84rem;line-height:1.5;}
+.task-body strong{display:block;margin-bottom:2px;}
+.task-body span{color:var(--m);font-size:.78rem;}
+.fin-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-end;}
+.fin-field{flex:1;}
+.fin-field label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
+.fin-field input,.fin-field select{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:8px 10px;outline:none;transition:border-color .2s;}
+.fin-field input:focus{border-color:var(--a2);}
+.gasto-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--b);}
+.gasto-item:last-child{border-bottom:none;}
+.gasto-desc{flex:1;font-size:.86rem;}
+.gasto-cat{font-size:.66rem;color:var(--m);font-family:'Space Mono',monospace;}
+.gasto-val{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;}
+.gasto-del{background:none;border:none;color:var(--m);cursor:pointer;font-size:.8rem;padding:2px 4px;}
+.gasto-del:hover{color:var(--danger);}
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--a);color:#000;font-family:'Space Mono',monospace;font-weight:700;font-size:.82rem;border:none;border-radius:10px;padding:13px;cursor:pointer;width:100%;transition:opacity .15s;margin-top:6px;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn.money{background:var(--a2);}
+.btn-sm{padding:7px 12px;font-size:.7rem;width:auto;border-radius:7px;margin-top:0;}
+.divider{border:none;border-top:1px solid var(--b);margin:10px 0;}
+.notif{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ok);color:#000;font-family:'Space Mono',monospace;font-weight:700;font-size:.74rem;padding:9px 18px;border-radius:100px;transition:transform .25s;z-index:999;white-space:nowrap;}
+.notif.show{transform:translateX(-50%) translateY(0);}
+.notif.err{background:var(--danger);color:#fff;}
+.empty{text-align:center;padding:16px;color:var(--m);font-size:.82rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">péricles<span class="acc">.app</span></div>
+  <div class="header-right">
+    <div class="sync-dot off" id="sync-dot"></div>
+    <div class="clk" id="clk">--:--</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="go('tempo',this)">⏰ Tempo</button>
+  <button class="tab" onclick="go('dinheiro',this)">💰 Saldo</button>
+</div>
+
+<main>
+<div class="page active" id="page-tempo">
+  <div class="saldo-grid">
+    <div class="sc time">
+      <div class="sc-label">Horas livres hoje</div>
+      <div class="sc-val time" id="horas-livres">--h</div>
+      <div class="sc-sub" id="horas-sub">Preencha a rotina</div>
+      <div class="sc-bar"><div class="sc-fill time" id="horas-bar" style="width:0%"></div></div>
+    </div>
+    <div class="sc money">
+      <div class="sc-label">Saldo do mês</div>
+      <div class="sc-val money" id="saldo-top">R$ --</div>
+      <div class="sc-sub" id="saldo-sub">Vá em Saldo</div>
+      <div class="sc-bar"><div class="sc-fill money" id="saldo-bar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="rec" id="rec-tempo">
+    <div class="rec-h">
+      <div class="rec-av">⚡</div>
+      <div><div class="rec-tit">Recomendação de hoje</div><div class="rec-sub" id="rec-sub"></div></div>
+    </div>
+    <div class="task-list" id="rec-tasks"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>01</span> Trabalho manhã</div>
+    <div class="bloco" style="margin:0;">
+      <div class="bchip" id="chip-t1" onclick="togB('t1')"><span class="ic">🔧</span><span class="lb">MANHÃ</span></div>
+      <div class="bpanel off" id="panel-t1">
+        <div class="hora-row">
+          <div class="hf"><label>ENTROU</label><input type="time" id="t1-ini" oninput="calcHoras()"></div>
+          <div class="hf"><label>SAIU</label><input type="time" id="t1-fim" oninput="calcHoras()"></div>
+        </div>
+        <div class="rating" id="r-t1">
+          <div class="ropt" onclick="rate('t1','ruim')">😓 ruim</div>
+          <div class="ropt" onclick="rate('t1','medio')">😐 médio</div>
+          <div class="ropt" onclick="rate('t1','bom')">😊 bom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>02</span> Almoço</div>
+    <div class="bloco" style="margin:0;">
+      <div class="bchip" id="chip-alm" onclick="togB('alm')"><span class="ic">🍽️</span><span class="lb">ALMOÇO</span></div>
+      <div class="bpanel off" id="panel-alm">
+        <div class="hora-row">
+          <div class="hf"><label>SAIU</label><input type="time" id="alm-ini" oninput="calcHoras()"></div>
+          <div class="hf"><label>VOLTOU</label><input type="time" id="alm-fim" oninput="calcHoras()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>03</span> Trabalho tarde</div>
+    <div class="bloco" style="margin:0;">
+      <div class="bchip" id="chip-t2" onclick="togB('t2')"><span class="ic">🔧</span><span class="lb">TARDE</span></div>
+      <div class="bpanel off" id="panel-t2">
+        <div class="hora-row">
+          <div class="hf"><label>ENTROU</label><input type="time" id="t2-ini" oninput="calcHoras()"></div>
+          <div class="hf"><label>SAIU</label><input type="time" id="t2-fim" oninput="calcHoras()"></div>
+        </div>
+        <div class="rating" id="r-t2">
+          <div class="ropt" onclick="rate('t2','ruim')">😓 ruim</div>
+          <div class="ropt" onclick="rate('t2','medio')">😐 médio</div>
+          <div class="ropt" onclick="rate('t2','bom')">😊 bom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>04</span> Academia</div>
+    <div class="bloco" style="margin:0;">
+      <div class="bchip" id="chip-gym" onclick="togB('gym')"><span class="ic">💪</span><span class="lb">ACADEMIA</span></div>
+      <div class="bpanel off" id="panel-gym">
+        <div class="hora-row">
+          <div class="hf"><label>ENTROU</label><input type="time" id="gym-ini" oninput="calcHoras()"></div>
+          <div class="hf"><label>SAIU</label><input type="time" id="gym-fim" oninput="calcHoras()"></div>
+        </div>
+        <input class="extra-inp" type="text" id="gym-treino" placeholder="Qual treino? (peito, perna...)">
+        <div class="rating" id="r-gym" style="margin-top:8px;">
+          <div class="ropt" onclick="rate('gym','ruim')">😓 ruim</div>
+          <div class="ropt" onclick="rate('gym','medio')">😐 médio</div>
+          <div class="ropt" onclick="rate('gym','bom')">💪 bom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn" id="btn-tempo" onclick="analisarDia()">⚡ Ver recomendação do dia</button>
+</div>
+
+<div class="page" id="page-dinheiro">
+  <div class="sc money" style="margin-bottom:12px;">
+    <div class="sc-label">Saldo disponível</div>
+    <div class="sc-val money" id="saldo-disp" style="font-size:1.65rem;">R$ 0,00</div>
+    <div class="sc-sub" id="saldo-disp-sub">de R$ 0,00 de renda</div>
+    <div class="sc-bar" style="margin-top:10px;height:5px;"><div class="sc-fill money" id="saldo-disp-bar" style="width:100%"></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>01</span> Entradas do mês</div>
+    <div class="fin-row">
+      <div class="fin-field"><label>SALÁRIO</label><input type="number" id="fin-salario" placeholder="0" step="0.01" oninput="salvarEntradas()"></div>
+      <div class="fin-field"><label>SALDO ATUAL</label><input type="number" id="fin-anterior" placeholder="0" step="0.01" oninput="salvarEntradas()"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title"><span>02</span> Gastos do dia a dia</div>
+    <div id="gastos-lista"><div class="empty" style="padding:6px 0;">Nenhum gasto ainda.</div></div>
+    <hr class="divider">
+    <div class="fin-row">
+      <div class="fin-field"><label>DESCRIÇÃO</label><input type="text" id="gasto-desc" placeholder="Padaria, Uber..."></div>
+      <div class="fin-field" style="max-width:100px;"><label>VALOR R$</label><input type="number" id="gasto-val" placeholder="0" step="0.01"></div>
+    </div>
+    <div class="fin-row">
+      <div class="fin-field"><label>CATEGORIA</label>
+        <select id="gasto-cat">
+          <option value="alimentação">🍔 Alimentação</option>
+          <option value="transporte">🚗 Transporte</option>
+          <option value="lazer">🎮 Lazer</option>
+          <option value="outros">📦 Outros</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn money btn-sm" onclick="addGasto()" style="width:auto;">+ Lançar gasto</button>
+  </div>
+</div>
+</main>
+<div class="notif" id="notif"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAx_p_gYT_ovyk3YxcwPqHaMQ6x0E7WWCg",
+  authDomain: "pericles-app-b3150.firebaseapp.com",
+  projectId: "pericles-app-b3150",
+  storageBucket: "pericles-app-b3150.firebasestorage.app",
+  messagingSenderId: "20181792548",
+  appId: "1:20181792548:web:2d688300f31427a19e25b1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const USER = 'pericles';
+
+let state = {
+  fin: {salario:0,anterior:0,gastos:[]},
+  hist: []
+};
+const ratings = {};
+
+const $ = id => document.getElementById(id);
+function notif(m, err=false) {
+  const n=$('notif'); n.textContent=m;
+  n.className='notif'+(err?' err':'');
+  n.classList.add('show');
+  setTimeout(()=>n.classList.remove('show'),2400);
+}
+
+function clk(){const n=new Date();$('clk').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');}
+clk(); setInterval(clk,30000);
+
+function today(){return new Date().toISOString().slice(0,10);}
+function fmtM(v){return'R$ '+parseFloat(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function setSyncDot(s){$('sync-dot').className='sync-dot'+(s==='ok'?'':s==='loading'?' loading':' off');}
+
+async function fbSave(key, data) {
+  try {
+    setSyncDot('loading');
+    await setDoc(doc(db,'usuarios',USER,'dados',key),{value:JSON.stringify(data)});
+    setSyncDot('ok');
+  } catch(e) { setSyncDot('off'); }
+}
+
+async function fbLoad(key){
+  try{const s=await getDoc(doc(db,'usuarios',USER,'dados',key));if(s.exists())return JSON.parse(s.data().value);}catch{}return null;
+}
+
+// CORREÇÃO: Funções Globais anexadas ao objeto window
+window.go=function(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  $('page-'+id).classList.add('active');btn.classList.add('active');
+  if(id==='dinheiro') renderFin();
+};
+
+window.togB=function(id){
+  const chip=$('chip-'+id),panel=$('panel-'+id);
+  const on=!chip.classList.contains('on');
+  chip.classList.toggle('on',on);
+  panel.classList.toggle('off',!on);
+  window.calcHoras();
+};
+
+window.rate=function(id,val){
+  ratings[id]=val;
+  const row=$('r-'+id);if(!row)return;
+  row.querySelectorAll('.ropt').forEach(r=>r.classList.remove('sel-ruim','sel-medio','sel-bom'));
+  const i={ruim:0,medio:1,bom:2}[val];
+  row.querySelectorAll('.ropt')[i]?.classList.add('sel-'+val);
+};
+
+window.calcHoras=function(){
+  let obrig=0;
+  const toMin=t=>{if(!t)return null;const[h,m]=t.split(':').map(Number);return h*60+m;};
+  const add=(a,b)=>{if(!a||!b)return;let d=toMin(b)-toMin(a);if(d>0)obrig+=d;};
+  if($('chip-t1').classList.contains('on'))add($('t1-ini').value,$('t1-fim').value);
+  if($('chip-alm').classList.contains('on'))add($('alm-ini').value,$('alm-fim').value);
+  if($('chip-t2').classList.contains('on'))add($('t2-ini').value,$('t2-fim').value);
+  if($('chip-gym').classList.contains('on'))add($('gym-ini').value,$('gym-fim').value);
+  const total=17*60,livres=Math.max(0,total-obrig);
+  const hL=Math.floor(livres/60),mL=livres%60;
+  $('horas-livres').textContent=hL>0?`${hL}h${mL>0?mL+'m':''}`:`${mL}m`;
+  $('horas-sub').textContent=obrig>0?`${Math.floor(obrig/60)}h em obrigações`:'Preencha a rotina';
+  $('horas-bar').style.width=Math.round(livres/total*100)+'%';
+};
+
+window.analisarDia=function(){
+  const btn=$('btn-tempo');btn.disabled=true;
+  const rec=$('rec-tempo');rec.classList.add('show');
+  $('rec-sub').textContent="Análise concluída 🙂";
+  $('rec-tasks').innerHTML=`<div class="task"><div class="task-n">1</div><div class="task-body"><strong>Bom trabalho!</strong><span>Continua focado nos teus objetivos.</span></div></div>`;
+  notif('✅ Dia analisado!');
+  btn.disabled=false;
+};
+
+window.salvarEntradas=function(){
+  state.fin.salario=parseFloat($('fin-salario').value)||0;
+  state.fin.anterior=parseFloat($('fin-anterior').value)||0;
+  fbSave('fin',state.fin); calcSaldo();
+};
+
+window.addGasto=function(){
+  const desc=$('gasto-desc').value.trim(),val=parseFloat($('gasto-val').value)||0,cat=$('gasto-cat').value;
+  if(!desc||!val){notif('Preenche os campos!',true);return;}
+  state.fin.gastos.unshift({id:Date.now(),desc,val,cat,date:today()});
+  $('gasto-desc').value='';$('gasto-val').value='';
+  renderGastos();calcSaldo();fbSave('fin',state.fin);
+};
+
+window.delGasto=function(id){
+  state.fin.gastos=state.fin.gastos.filter(g=>g.id!==id);
+  renderGastos();calcSaldo();fbSave('fin',state.fin);
+};
+
+function renderGastos(){
+  const el=$('gastos-lista'),gs=state.fin.gastos||[];
+  el.innerHTML=gs.length?gs.map(g=>`<div class="gasto-item"><div><div class="gasto-desc">${g.desc}</div><div class="gasto-cat">${g.cat}</div></div><div class="gasto-val" style="color:var(--danger)">-${fmtM(g.val)}</div><button class="gasto-del" onclick="delGasto(${g.id})">✕</button></div>`).join(''):'<div class="empty">Nenhum gasto ainda.</div>';
+}
+
+function calcSaldo(){
+  const f=state.fin;
+  const entrada=(f.salario||0)+(f.anterior||0);
+  const gs=(f.gastos||[]).reduce((s,g)=>s+g.val,0);
+  const saldo=entrada-gs;
+  $('saldo-disp').textContent=fmtM(saldo);
+  $('saldo-top').textContent=fmtM(saldo);
+  $('saldo-disp-sub').textContent=`de ${fmtM(entrada)} de renda`;
+}
+
+function renderFin(){
+  $('fin-salario').value=state.fin.salario||'';
+  $('fin-anterior').value=state.fin.anterior||'';
+  renderGastos();calcSaldo();
+}
+
+async function init(){
+  setSyncDot('loading');
+  const [fin,hist]=await Promise.all([fbLoad('fin'),fbLoad('hist')]);
+  if(fin) state.fin=fin;
+  if(hist) state.hist=hist;
+  renderFin();
+  setSyncDot('ok');
+}
+init();
+</script>
+</body>
+</html>
