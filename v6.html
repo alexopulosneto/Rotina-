@@ -1,136 +1,243 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Péricles ⚡</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* Cole aqui todo aquele bloco <style> que você já tem no seu arquivo */
-        :root{ --bg:#080a0d;--s:#0f1218;--a:#00e5ff;--t:#e8edf2;--m:#5a6a7a;--ok:#7fff6b;--warn:#ffcc00;--danger:#ff4444;--r:12px; }
-        body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;margin:0;}
-        header{background:var(--s);padding:15px;display:flex;justify-content:space-between;border-bottom:1px solid #1e2530;}
-        .logo{font-family:'Space Mono',monospace;font-weight:700;}
-        .tabs{display:flex;background:var(--s);border-bottom:1px solid #1e2530;}
-        .tab{flex:1;padding:12px;background:none;border:none;color:var(--m);font-family:'Space Mono';font-size:10px;cursor:pointer;}
-        .tab.active{color:var(--a);border-bottom:2px solid var(--a);}
-        main{padding:15px;}
-        .page{display:none;}.active{display:block;}
-        .sec{background:var(--s);padding:15px;border-radius:var(--r);margin-bottom:10px;border:1px solid #1e2530;}
-        .chat-box{background:var(--s);border:1px solid #1e2530;border-radius:var(--r);margin-top:10px;}
-        .chat-msgs{padding:15px;height:300px;overflow-y:auto;font-size:14px;}
-        .chat-irow{display:flex;padding:10px;gap:10px;background:#161b22;}
-        .cinp{flex:1;background:#080a0d;border:1px solid #1e2530;color:#fff;padding:8px;border-radius:5px;}
-        .csend{background:var(--a);border:none;padding:8px 15px;border-radius:5px;font-weight:bold;cursor:pointer;}
-        .error-msg{color:var(--danger);font-size:12px;margin-top:5px;display:none;}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Péricles ⚡</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080a0d;--s:#0f1218;--s2:#161b22;--b:#1e2530;--b2:#2a3340;
+  --a:#00e5ff;--a2:#ff6b35;--t:#e8edf2;--m:#5a6a7a;
+  --ok:#7fff6b;--warn:#ffcc00;--danger:#ff4444;--r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;min-height:100vh;}
+header{background:var(--s);border-bottom:1px solid var(--b);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;}
+.logo{font-family:'Space Mono',monospace;font-weight:700;font-size:.9rem;color:var(--t);}
+.logo .acc{color:var(--a);}
+.header-right{display:flex;align-items:center;gap:8px;}
+.clk{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--m);background:var(--s2);border:1px solid var(--b);padding:4px 10px;border-radius:100px;}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex-shrink:0;}
+.sync-dot.off{background:var(--danger);}
+.sync-dot.loading{background:var(--warn);animation:pulse .8s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tabs{display:flex;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{flex:1;min-width:55px;font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;padding:10px 4px;border:none;background:transparent;color:var(--m);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.tab.active{color:var(--a);border-bottom:2px solid var(--a);}
+main{padding:14px;max-width:540px;margin:0 auto;}
+.page{display:none;}.page.active{display:block;animation:fu .2s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.saldo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.sc.time::before{background:linear-gradient(90deg,var(--a),transparent);}
+.sc.money::before{background:linear-gradient(90deg,var(--a2),transparent);}
+.sc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.sc-val{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;line-height:1;}
+.sc-val.time{color:var(--a);}
+.sc-val.money{color:var(--a2);}
+.sc-sub{font-size:.7rem;color:var(--m);margin-top:4px;}
+.sc-bar{height:3px;background:var(--b2);border-radius:100px;margin-top:8px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:100px;transition:width .5s;}
+.sc-fill.time{background:var(--a);}
+.sc-fill.money{background:var(--a2);}
+.sec{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;margin-bottom:10px;}
+.sec-title{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.sec-title span{color:var(--a);}
+.bloco{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;}
+.bchip{flex-shrink:0;width:88px;background:var(--s2);border:1.5px solid var(--b);border-radius:10px;padding:10px 6px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:4px;user-select:none;}
+.bchip.on{background:#0a1a1e;border-color:var(--a);}
+.bchip .ic{font-size:1.2rem;}
+.bchip .lb{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--m);text-align:center;line-height:1.3;font-weight:700;}
+.bchip.on .lb{color:var(--a);}
+.bpanel{flex:1;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:10px;transition:opacity .2s;}
+.bpanel.off{opacity:.3;pointer-events:none;}
+.hora-row{display:flex;gap:6px;margin-bottom:8px;}
+.hf{flex:1;}
+.hf label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
+.hf input[type=time]{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:7px 8px;outline:none;}
+.rating{display:flex;gap:4px;}
+.ropt{flex:1;background:var(--bg);border:1px solid var(--b);border-radius:6px;padding:5px 3px;text-align:center;font-size:.66rem;font-weight:700;font-family:'Space Mono',monospace;color:var(--m);cursor:pointer;}
+.ropt.sel-ruim{background:#1a0808;border-color:var(--danger);color:var(--danger);}
+.ropt.sel-medio{background:#1a1408;border-color:var(--warn);color:var(--warn);}
+.ropt.sel-bom{background:#081a08;border-color:var(--ok);color:var(--ok);}
+.extra-inp{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:7px 8px;outline:none;margin-top:7px;}
+.rec{background:linear-gradient(135deg,#0a1218,var(--s));border:1px solid var(--a);border-radius:var(--r);padding:15px;margin-bottom:13px;display:none;}
+.rec.show{display:block;}
+.task-list{display:flex;flex-direction:column;gap:7px;margin-top:8px;}
+.task{display:flex;gap:9px;background:var(--s2);border:1px solid var(--b);border-radius:9px;padding:9px 11px;}
+.task-n{font-family:'Space Mono',monospace;font-weight:700;color:var(--a);font-size:.86rem;}
+.fin-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-end;}
+.fin-field{flex:1;}
+.fin-field label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
+.fin-field input,.fin-field select{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-size:.88rem;padding:8px 10px;outline:none;}
+.gasto-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--b);}
+.gasto-desc{flex:1;font-size:.86rem;}
+.chat-box{background:var(--s);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;margin-bottom:11px;}
+.chat-msgs{padding:12px;display:flex;flex-direction:column;gap:9px;max-height:50vh;overflow-y:auto;}
+.chat-irow{display:flex;gap:6px;padding:9px 10px;border-top:1px solid var(--b);background:var(--s2);}
+.cinp{flex:1;background:var(--s);border:1px solid var(--b);border-radius:8px;color:var(--t);padding:8px 11px;outline:none;}
+.csend{background:var(--a);color:#000;border:none;border-radius:8px;padding:8px 13px;font-family:'Space Mono',monospace;font-weight:700;cursor:pointer;}
+.bmsg{max-width:86%;margin-bottom:8px;}.bmsg-ia{align-self:flex-start;}.bmsg-user{align-self:flex-end;}
+.bbub{padding:9px 12px;border-radius:12px;font-size:.87rem;line-height:1.5;background:var(--s2);border:1px solid var(--b);}
+.bmsg-user .bbub{background:var(--a);color:#000;}
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--a);color:#000;font-family:'Space Mono',monospace;font-weight:700;font-size:.82rem;border:none;border-radius:10px;padding:13px;cursor:pointer;width:100%;margin-top:6px;}
+.notif{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ok);color:#000;padding:9px 18px;border-radius:100px;transition:transform .25s;z-index:999;font-weight:700;}
+.notif.show{transform:translateX(-50%) translateY(0);}
+.dots{display:flex;gap:4px;}
+.dot{width:5px;height:5px;background:var(--a);border-radius:50%;animation:bn 1.1s infinite;}
+@keyframes bn{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+</style>
 </head>
 <body>
 
 <header>
-    <div class="logo">péricles<span style="color:var(--a)">.app</span></div>
-    <div id="sync-dot" style="width:10px;height:10px;border-radius:50%;background:gray;"></div>
+  <div class="logo">péricles<span class="acc">.app</span></div>
+  <div class="header-right">
+    <div class="sync-dot off" id="sync-dot"></div>
+    <div class="clk" id="clk">--:--</div>
+  </div>
 </header>
 
 <div class="tabs">
-    <button class="tab active" onclick="go('tempo')">⏰ Tempo</button>
-    <button class="tab" onclick="go('dinheiro')">💰 Saldo</button>
-    <button class="tab" onclick="go('ia')">⚡ IA</button>
+  <button class="tab active" onclick="go('tempo',this)">⏰ Tempo</button>
+  <button class="tab" onclick="go('dinheiro',this)">💰 Saldo</button>
+  <button class="tab" onclick="go('ia',this)">⚡ IA</button>
+  <button class="tab" onclick="go('perfil',this)">🧠 Perfil</button>
+  <button class="tab" onclick="go('config',this)">⚙️</button>
 </div>
 
 <main>
-    <div id="tempo" class="page active">
-        <div class="sec"><h3>Rotina de Hoje</h3><p>Use o PC para importar dados ou cadastre abaixo.</p></div>
-    </div>
-    
-    <div id="dinheiro" class="page">
-        <div class="sec"><h3>Financeiro</h3><p>Sincronizado com Firebase.</p></div>
-    </div>
+<div class="page active" id="page-tempo">
+  <div class="saldo-grid">
+    <div class="sc time"><div class="sc-label">Horas livres</div><div class="sc-val time" id="horas-livres">--h</div><div class="sc-bar"><div class="sc-fill time" id="horas-bar" style="width:0%"></div></div></div>
+    <div class="sc money"><div class="sc-label">Saldo do mês</div><div class="sc-val money" id="saldo-top">R$ --</div><div class="sc-bar"><div class="sc-fill money" id="saldo-bar" style="width:0%"></div></div></div>
+  </div>
+  <div class="rec" id="rec-tempo">
+    <div id="rec-tempo-sub" style="font-size:0.8rem; color:var(--a); margin-bottom:10px;"></div>
+    <div class="task-list" id="rec-tempo-tasks"></div>
+  </div>
+  <div class="sec"><div class="sec-title"><span>01</span> Manhã</div><div class="bloco"><div class="bchip" id="chip-t1" onclick="togB('t1')">🔧</div><div class="bpanel off" id="panel-t1"><div class="hora-row"><div class="hf"><input type="time" id="t1-ini" oninput="calcHoras()"></div><div class="hf"><input type="time" id="t1-fim" oninput="calcHoras()"></div></div></div></div></div>
+  <div class="sec"><div class="sec-title"><span>02</span> Almoço</div><div class="bloco"><div class="bchip" id="chip-alm" onclick="togB('alm')">🍽️</div><div class="bpanel off" id="panel-alm"><div class="hora-row"><div class="hf"><input type="time" id="alm-ini" oninput="calcHoras()"></div><div class="hf"><input type="time" id="alm-fim" oninput="calcHoras()"></div></div></div></div></div>
+  <div class="sec"><div class="sec-title"><span>03</span> Tarde</div><div class="bloco"><div class="bchip" id="chip-t2" onclick="togB('t2')">🔧</div><div class="bpanel off" id="panel-t2"><div class="hora-row"><div class="hf"><input type="time" id="t2-ini" oninput="calcHoras()"></div><div class="hf"><input type="time" id="t2-fim" oninput="calcHoras()"></div></div></div></div></div>
+  <div class="sec"><div class="sec-title"><span>04</span> Academia</div><div class="bloco"><div class="bchip" id="chip-gym" onclick="togB('gym')">💪</div><div class="bpanel off" id="panel-gym"><div class="hora-row"><div class="hf"><input type="time" id="gym-ini" oninput="calcHoras()"></div><div class="hf"><input type="time" id="gym-fim" oninput="calcHoras()"></div></div></div></div></div>
+  <button class="btn" id="btn-tempo" onclick="analisarTempo()">⚡ Analisar dia e recomendar</button>
+</div>
 
-    <div id="ia" class="page">
-        <div class="chat-box">
-            <div class="chat-msgs" id="chat-content"></div>
-            <div id="ia-error" class="error-msg" style="padding:10px; background:#2a0808;"></div>
-            <div class="chat-irow">
-                <input type="text" id="user-input" class="cinp" placeholder="Pergunta pro Claude...">
-                <button class="csend" onclick="falarComIA()">Enviar</button>
-            </div>
-        </div>
-    </div>
+<div class="page" id="page-dinheiro"><div class="sec"><h3>Financeiro</h3><p id="saldo-disp">R$ 0,00</p></div></div>
+<div class="page" id="page-ia">
+  <div class="chat-box"><div class="chat-msgs" id="ia-msgs"></div>
+  <div class="chat-irow"><input type="text" class="cinp" id="ia-inp" placeholder="Pergunte algo..."><button class="csend" onclick="envIA()">→</button></div></div>
+</div>
+<div class="page" id="page-perfil"><div class="sec"><h3>Perfil do Péricles</h3><div id="info-g"></div></div></div>
+<div class="page" id="page-config"><div class="sec"><h3>Configurações</h3><button class="btn" onclick="limparTudo()">🗑️ Limpar Tudo</button></div></div>
 </main>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<div class="notif" id="notif"></div>
 
-<script>
-    // 1. CONFIGURAÇÃO DO FIREBASE (Coloque seus dados aqui)
-    const firebaseConfig = {
-        apiKey: "SUA_API_KEY_AQUI",
-        authDomain: "SEU_PROJETO.firebaseapp.com",
-        projectId: "SEU_PROJETO_ID",
-        storageBucket: "SEU_PROJETO.appspot.com",
-        messagingSenderId: "ID",
-        appId: "APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // 2. CONFIGURAÇÃO DO CLAUDE
-    const CLAUDE_KEY = "SUA_CHAVE_SK_ANT_AQUI";
+const firebaseConfig = {
+  apiKey: "AIzaSyAx_p_gYT_ovyk3YxcwPqHaMQ6x0E7WWCg",
+  authDomain: "pericles-app-b3150.firebaseapp.com",
+  projectId: "pericles-app-b3150",
+  storageBucket: "pericles-app-b3150.firebasestorage.app",
+  messagingSenderId: "20181792548",
+  appId: "1:20181792548:web:2d688300f31427a19e25b1"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const USER = 'pericles';
 
-    // Função de Troca de Abas
-    function go(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        event.currentTarget.classList.add('active');
+// CHAVE DO CLAUDE
+const CLAUDE_KEY = "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";
+
+let state = { fin: {salario:0, anterior:0, fixos:[], gastos:[]}, hist: [], perfil: {}, ia_chat: [] };
+
+const $ = id => document.getElementById(id);
+function notif(m) { const n=$('notif'); n.textContent=m; n.classList.add('show'); setTimeout(()=>n.classList.remove('show'),2000); }
+function clk() { const n=new Date(); $('clk').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'); }
+setInterval(clk, 1000); clk();
+
+async function fbSave(key, data) {
+  $('sync-dot').className='sync-dot loading';
+  await setDoc(doc(db, 'usuarios', USER, 'dados', key), {value: JSON.stringify(data)});
+  $('sync-dot').className='sync-dot';
+}
+
+window.go = function(id, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  $('page-'+id).classList.add('active'); btn.classList.add('active');
+};
+
+window.togB = function(id) {
+  $('chip-'+id).classList.toggle('on'); $('panel-'+id).classList.toggle('off'); calcHoras();
+};
+
+function toMin(t) { if(!t) return 0; const [h,m]=t.split(':').map(Number); return h*60+m; }
+
+window.calcHoras = function() {
+  let obrig = 0;
+  const ids = ['t1','alm','t2','gym'];
+  ids.forEach(id => {
+    if($('chip-'+id).classList.contains('on')) {
+      const d = toMin($(`${id}-fim`).value) - toMin($(`${id}-ini`).value);
+      if(d>0) obrig += d;
     }
+  });
+  const total = 17*60, livres = Math.max(0, total-obrig);
+  $('horas-livres').textContent = Math.floor(livres/60)+'h'+(livres%60)+'m';
+  $('horas-bar').style.width = Math.round((livres/total)*100)+'%';
+};
 
-    // FUNÇÃO PRINCIPAL: FALAR COM A IA (CORRIGIDA)
-    async function falarComIA() {
-        const input = document.getElementById('user-input');
-        const content = document.getElementById('chat-content');
-        const errorDiv = document.getElementById('ia-error');
-        const msg = input.value;
-        if(!msg) return;
+window.analisarTempo = async function() {
+  const btn = $('btn-tempo'); btn.textContent = 'Analisando...';
+  const diaRes = `Manhã: ${$('t1-ini').value}-${$('t1-fim').value}, Tarde: ${$('t2-ini').value}-${$('t2-fim').value}`;
+  
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': CLAUDE_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-3-haiku-20240307',
+        max_tokens: 500,
+        messages: [{role:'user', content: `Péricles trabalhou hoje: ${diaRes}. Sugira 2 tarefas de estudo para a PRF ou Programação agora a noite. Responda em JSON: {"avaliacao":"texto", "tasks":[{"n":1, "titulo":"...", "desc":"..."}]}`}]
+      })
+    });
+    const data = await r.json();
+    const j = JSON.parse(data.content[0].text);
+    $('rec-tempo').style.display = 'block';
+    $('rec-tempo-sub').textContent = j.avaliacao;
+    $('rec-tempo-tasks').innerHTML = j.tasks.map(t=>`<div class="task"><div class="task-n">${t.n}</div><div class="task-body"><b>${t.titulo}</b><br>${t.desc}</div></div>`).join('');
+    notif("✅ Análise completa!");
+  } catch(e) {
+    console.error(e); notif("❌ Erro na IA");
+  }
+  btn.textContent = '⚡ Analisar dia e recomendar';
+};
 
-        content.innerHTML += `<p><strong>Você:</strong> ${msg}</p>`;
-        input.value = '';
-        errorDiv.style.display = 'none';
-
-        try {
-            // Usamos um Proxy para evitar o erro de CORS do navegador
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: {
-                    'x-api-key': CLAUDE_KEY,
-                    'anthropic-version': '2023-06-01',
-                    'content-type': 'application/json',
-                    'dangerously-allow-browser': 'true' // Isso ajuda em alguns ambientes
-                },
-                body: JSON.stringify({
-                    model: "claude-3-haiku-20240307",
-                    max_tokens: 1024,
-                    messages: [{role: "user", content: msg}]
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(`Erro ${response.status}: ${errorData.error.message}`);
-            }
-
-            const data = await response.json();
-            const respostaIA = data.content[0].text;
-            content.innerHTML += `<p style="color:#00e5ff"><strong>Claude:</strong> ${respostaIA}</p>`;
-            content.scrollTop = content.scrollHeight;
-
-        } catch (err) {
-            console.error(err);
-            errorDiv.innerText = "Erro na conexão: " + err.message;
-            errorDiv.style.display = 'block';
-        }
-    }
+// Inicialização Firebase
+(async function init() {
+  const keys = ['fin','hist','perfil','ia_chat'];
+  for(let k of keys) {
+    const snap = await getDoc(doc(db, 'usuarios', USER, 'dados', k));
+    if(snap.exists()) state[k] = JSON.parse(snap.data().value);
+  }
+  $('sync-dot').className='sync-dot';
+  calcHoras();
+})();
 </script>
 </body>
 </html>
