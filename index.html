@@ -18,111 +18,62 @@ body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;min-he
 header{background:var(--s);border-bottom:1px solid var(--b);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;}
 .logo{font-family:'Space Mono',monospace;font-weight:700;font-size:.9rem;color:var(--t);}
 .logo .acc{color:var(--a);}
-.header-right{display:flex;align-items:center;gap:8px;}
 .clk{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--m);background:var(--s2);border:1px solid var(--b);padding:4px 10px;border-radius:100px;}
-.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex-shrink:0;}
-.sync-dot.off{background:var(--danger);}
-.sync-dot.loading{background:var(--warn);animation:pulse .8s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .tabs{display:flex;background:var(--s);border-bottom:1px solid var(--b);}
-.tab{flex:1;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;padding:11px 4px;border:none;background:transparent;color:var(--m);cursor:pointer;transition:all .15s;}
+.tab{flex:1;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;padding:11px 4px;border:none;background:transparent;color:var(--m);cursor:pointer;}
 .tab.active{color:var(--a);border-bottom:2px solid var(--a);}
 main{padding:14px;max-width:540px;margin:0 auto;}
-.page{display:none;}.page.active{display:block;animation:fu .2s ease;}
-@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.page{display:none;}.page.active{display:block;}
 
+/* Cards de Topo */
 .saldo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
-.sc{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;position:relative;overflow:hidden;}
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.sc.time::before{background:linear-gradient(90deg,var(--a),transparent);}
-.sc.money::before{background:linear-gradient(90deg,var(--a2),transparent);}
-.sc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.sc-val{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;line-height:1;}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;position:relative;}
+.sc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--m);text-transform:uppercase;margin-bottom:5px;}
+.sc-val{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;}
 .sc-val.time{color:var(--a);}
 .sc-val.money{color:var(--a2);}
-.sc-sub{font-size:.7rem;color:var(--m);margin-top:4px;}
-.sc-bar{height:3px;background:var(--b2);border-radius:100px;margin-top:8px;overflow:hidden;}
-.sc-fill{height:100%;border-radius:100px;transition:width .5s;}
-.sc-fill.time{background:var(--a);}
-.sc-fill.money{background:var(--a2);}
 
+/* Seções */
 .sec{background:var(--s);border:1px solid var(--b);border-radius:var(--r);padding:13px;margin-bottom:10px;}
-.sec-title{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.sec-title{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--m);text-transform:uppercase;margin-bottom:10px;}
 .sec-title span{color:var(--a);}
 
-.bloco{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;}
-.bchip{flex-shrink:0;width:88px;background:var(--s2);border:1.5px solid var(--b);border-radius:10px;padding:10px 6px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:4px;user-select:none;}
-.bchip.on{background:#0a1a1e;border-color:var(--a);}
-.bchip .ic{font-size:1.2rem;}
-.bchip .lb{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--m);text-align:center;line-height:1.3;font-weight:700;}
-.bchip.on .lb{color:var(--a);}
-.bpanel{flex:1;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:10px;transition:opacity .2s;}
-.bpanel.off{opacity:.3;pointer-events:none;}
-.hora-row{display:flex;gap:6px;margin-bottom:8px;}
-.hf{flex:1;}
-.hf label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
-.hf input[type=time]{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:7px 8px;outline:none;transition:border-color .2s;}
-.hf input[type=time]:focus{border-color:var(--a);}
-.rating{display:flex;gap:4px;}
-.ropt{flex:1;background:var(--bg);border:1px solid var(--b);border-radius:6px;padding:5px 3px;text-align:center;font-size:.66rem;font-weight:700;font-family:'Space Mono',monospace;color:var(--m);cursor:pointer;transition:all .15s;user-select:none;}
-.ropt.sel-ruim{background:#1a0808;border-color:var(--danger);color:var(--danger);}
-.ropt.sel-medio{background:#1a1408;border-color:var(--warn);color:var(--warn);}
-.ropt.sel-bom{background:#081a08;border-color:var(--ok);color:var(--ok);}
+/* Blocos de Rotina */
+.bloco{display:flex;gap:8px;margin-bottom:8px;}
+.bchip{width:80px;background:var(--s2);border:1.5px solid var(--b);border-radius:10px;padding:8px;text-align:center;cursor:pointer;}
+.bchip.on{border-color:var(--a);background:#0a1a1e;}
+.bpanel{flex:1;background:var(--s2);border-radius:10px;padding:10px;}
+.bpanel.off{opacity:0.3;pointer-events:none;}
+.hf label{display:block;font-size:.55rem;color:var(--m);margin-bottom:2px;}
+.hf input{width:100%;background:var(--bg);border:1px solid var(--b);color:#fff;padding:5px;border-radius:5px;}
 
-.rec-container{margin: 10px 0; border-left: 2px dashed var(--b2); padding-left: 15px;}
-.rec{background:linear-gradient(135deg,#0a1218,var(--s));border:1px solid var(--a);border-radius:var(--r);padding:15px;margin-bottom:13px;display:none;}
-.rec.show{display:block;animation:fu .3s ease;}
-.rec-h{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
-.rec-av{width:30px;height:30px;background:var(--a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;color:#000;}
-.rec-tit{font-family:'Space Mono',monospace;font-weight:700;font-size:.76rem;color:var(--a);}
-.rec-sub{font-size:.67rem;color:var(--m);}
-.task-list{display:flex;flex-direction:column;gap:7px;margin-top:8px;}
-.task{display:flex;gap:9px;background:var(--s2);border:1px solid var(--b);border-radius:9px;padding:9px 11px;}
-.task-n{font-family:'Space Mono',monospace;font-weight:700;color:var(--a);font-size:.86rem;flex-shrink:0;}
-.task-body{font-size:.84rem;line-height:1.5;}
-.task-body strong{display:block;margin-bottom:2px;}
-.task-body span{color:var(--m);font-size:.78rem;}
+/* Recomendações */
+.rec-area{border-left:2px dashed var(--b2);padding-left:15px;margin:15px 0;}
+.rec-box{background:linear-gradient(135deg,#0a1218,var(--s));border:1px solid var(--a);padding:12px;border-radius:10px;display:none;}
+.rec-box.show{display:block;}
 
-.fin-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-end;}
-.fin-field{flex:1;}
-.fin-field label{display:block;font-size:.6rem;color:var(--m);margin-bottom:3px;font-family:'Space Mono',monospace;}
-.fin-field input,.fin-field select{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:7px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:8px 10px;outline:none;transition:border-color .2s;}
-.fin-field input:focus{border-color:var(--a2);}
-.gasto-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--b);}
-.gasto-item:last-child{border-bottom:none;}
-.gasto-desc{flex:1;font-size:.86rem;}
-.gasto-cat{font-size:.66rem;color:var(--m);font-family:'Space Mono',monospace;}
-.gasto-val{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;}
-.gasto-del{background:none;border:none;color:var(--m);cursor:pointer;font-size:.8rem;padding:2px 4px;}
+/* Saldo & Gráfico */
+.money-main{display:flex;align-items:center;gap:15px;margin-bottom:15px;}
+.pizza-wrap{position:relative;width:80px;height:80px;}
+canvas{width:80px;height:80px;}
+.saldo-info{flex:1;}
 
-.btn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--a);color:#000;font-family:'Space Mono',monospace;font-weight:700;font-size:.82rem;border:none;border-radius:10px;padding:13px;cursor:pointer;width:100%;transition:opacity .15s;margin-top:6px;}
-.btn.money{background:var(--a2);}
-.btn-sm{padding:7px 12px;font-size:.7rem;width:auto;border-radius:7px;margin-top:0;}
-.btn-discreto{background:none;border:none;color:var(--m);font-size:.55rem;font-family:'Space Mono',monospace;text-transform:uppercase;cursor:pointer;margin-top:10px;opacity:0.6;}
+.fin-input-row{display:flex;gap:5px;margin-bottom:10px;}
+.fin-input-row input{flex:1;background:var(--bg);border:1px solid var(--b);color:#fff;padding:8px;border-radius:8px;font-size:.8rem;}
 
-.notif{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ok);color:#000;font-family:'Space Mono',monospace;font-weight:700;font-size:.74rem;padding:9px 18px;border-radius:100px;transition:transform .25s;z-index:999;white-space:nowrap;}
-.notif.show{transform:translateX(-50%) translateY(0);}
+.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:700;font-family:'Space Mono',monospace;cursor:pointer;}
+.btn-a{background:var(--a);color:#000;}
+.btn-a2{background:var(--a2);color:#000;}
+.btn-discreto{background:none;color:var(--m);font-size:.5rem;margin-top:10px;border:none;width:100%;text-transform:uppercase;}
 
-.meta-item{margin-bottom:12px;}
-.meta-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
-.meta-nome{font-size:.86rem;font-weight:600;}
-.meta-vals{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--m);}
-.meta-bar{height:6px;background:var(--b2);border-radius:100px;overflow:hidden;}
-.meta-fill{height:100%;border-radius:100px;transition:width .5s;}
-
-.imp-exp{display:flex;gap:8px;margin-top:15px;}
-.btn-util{flex:1;background:var(--s2);border:1px solid var(--b);color:var(--m);padding:10px;border-radius:8px;font-size:.65rem;font-family:'Space Mono',monospace;cursor:pointer;}
-.btn-util.export{background:#081a08;color:var(--ok);border-color:var(--ok);}
+.notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ok);padding:8px 20px;border-radius:100px;color:#000;display:none;font-size:.7rem;font-weight:700;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">péricles<span class="acc">.app</span></div>
-  <div class="header-right">
-    <div class="sync-dot off" id="sync-dot"></div>
-    <div class="clk" id="clk">--:--</div>
-  </div>
+  <div class="clk" id="clk">00:00</div>
 </header>
 
 <div class="tabs">
@@ -131,261 +82,166 @@ main{padding:14px;max-width:540px;margin:0 auto;}
 </div>
 
 <main>
-
-<div class="page active" id="page-tempo">
-
-  <div class="saldo-grid">
-    <div class="sc time">
-      <div class="sc-label">Tempo Livre</div>
-      <div class="sc-val time" id="horas-livres">--h</div>
-      <div class="sc-sub" id="horas-sub">Calculando...</div>
+  <div class="page active" id="page-tempo">
+    <div class="saldo-grid">
+      <div class="sc"><div class="sc-label">Livre</div><div class="sc-val time" id="h-livre">--h</div></div>
+      <div class="sc"><div class="sc-label">Saldo</div><div class="sc-val money" id="s-topo">R$ 0</div></div>
     </div>
-    <div class="sc money">
-      <div class="sc-label">Saldo Mês</div>
-      <div class="sc-val money" id="saldo-top">R$ --</div>
-      <div class="sc-sub" id="saldo-sub">Vá em Saldo</div>
-    </div>
-  </div>
 
-  <div class="sec">
-    <div class="sec-title"><span>01</span> Sono</div>
-    <div class="bloco">
-      <div class="bchip" id="chip-sono" onclick="togB('sono')"><span class="ic">😴</span><span class="lb">DORMIU</span></div>
-      <div class="bpanel off" id="panel-sono">
-        <div class="hora-row">
-          <div class="hf"><label>DEITOU</label><input type="time" id="sono-ini" oninput="calcHoras()"></div>
-          <div class="hf"><label>ACORDOU</label><input type="time" id="sono-fim" oninput="calcHoras()"></div>
+    <div class="sec">
+      <div class="sec-title"><span>01</span> Sono</div>
+      <div class="bloco">
+        <div class="bchip" id="c-sono" onclick="togB('sono')">😴<br><small>SONO</small></div>
+        <div class="bpanel off" id="p-sono">
+          <div style="display:flex;gap:5px">
+            <div class="hf"><label>DEITOU</label><input type="time" id="sono-i" oninput="calc()"></div>
+            <div class="hf"><label>ACORDOU</label><input type="time" id="sono-f" oninput="calc()"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="rec-container">
-    <div class="rec" id="rec-tempo">
-      <div class="rec-h">
-        <div class="rec-av">⚡</div>
-        <div><div class="rec-tit">Foco sugerido</div><div class="rec-sub" id="rec-sub">Analise o dia abaixo</div></div>
+    <div class="rec-area">
+      <div class="rec-box" id="rec-box">
+        <div style="color:var(--a);font-weight:700;font-size:.7rem;margin-bottom:5px">⚡ RECOMENDAÇÃO</div>
+        <div id="rec-lista" style="font-size:.8rem;color:var(--m)">Analise o dia para ver...</div>
       </div>
-      <div class="task-list" id="rec-tasks"></div>
     </div>
-  </div>
 
-  <div class="sec">
-    <div class="sec-title"><span>02</span> Trabalho Manhã</div>
-    <div class="bloco">
-      <div class="bchip" id="chip-t1" onclick="togB('t1')"><span class="ic">🔧</span><span class="lb">MANHÃ</span></div>
-      <div class="bpanel off" id="panel-t1">
-        <div class="hora-row">
-          <div class="hf"><label>ENTROU</label><input type="time" id="t1-ini" oninput="calcHoras()"></div>
-          <div class="hf"><label>SAIU</label><input type="time" id="t1-fim" oninput="calcHoras()"></div>
-        </div>
-        <div class="rating" id="r-t1">
-          <div class="ropt" onclick="rate('t1','ruim')">😓</div>
-          <div class="ropt" onclick="rate('t1','medio')">😐</div>
-          <div class="ropt" onclick="rate('t1','bom')">😊</div>
+    <div class="sec">
+      <div class="sec-title"><span>02</span> Trabalho</div>
+      <div class="bloco">
+        <div class="bchip" id="c-t1" onclick="togB('t1')">🔧<br><small>MANHÃ</small></div>
+        <div class="bpanel off" id="p-t1">
+          <div style="display:flex;gap:5px">
+            <input type="time" id="t1-i" oninput="calc()"> às <input type="time" id="t1-f" oninput="calc()">
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="sec">
-    <div class="sec-title"><span>03</span> Almoço</div>
-    <div class="bloco">
-      <div class="bchip" id="chip-alm" onclick="togB('alm')"><span class="ic">🍽️</span><span class="lb">ALMOÇO</span></div>
-      <div class="bpanel off" id="panel-alm">
-        <div class="hora-row">
-          <div class="hf"><label>SAIU</label><input type="time" id="alm-ini" oninput="calcHoras()"></div>
-          <div class="hf"><label>VOLTOU</label><input type="time" id="alm-fim" oninput="calcHoras()"></div>
+    <div class="sec">
+      <div class="sec-title"><span>03</span> Academia</div>
+      <div class="bloco">
+        <div class="bchip" id="c-gym" onclick="togB('gym')">💪<br><small>TREINO</small></div>
+        <div class="bpanel off" id="p-gym">
+          <input type="time" id="gym-i" oninput="calc()"> às <input type="time" id="gym-f" oninput="calc()">
         </div>
       </div>
     </div>
+
+    <button class="btn btn-a" onclick="analisar()">⚡ ANALISAR DIA</button>
+    <button class="btn-discreto" onclick="addImp()">+ imprevisto (15m)</button>
   </div>
 
-  <div class="sec">
-    <div class="sec-title"><span>04</span> Trabalho Tarde</div>
-    <div class="bloco">
-      <div class="bchip" id="chip-t2" onclick="togB('t2')"><span class="ic">🔧</span><span class="lb">TARDE</span></div>
-      <div class="bpanel off" id="panel-t2">
-        <div class="hora-row">
-          <div class="hf"><label>ENTROU</label><input type="time" id="t2-ini" oninput="calcHoras()"></div>
-          <div class="hf"><label>SAIU</label><input type="time" id="t2-fim" oninput="calcHoras()"></div>
+  <div class="page" id="page-dinheiro">
+    <div class="sec">
+      <div class="money-main">
+        <div class="pizza-wrap"><canvas id="pizza"></canvas></div>
+        <div class="saldo-info">
+          <div class="sc-label">Disponível</div>
+          <div class="sc-val money" id="s-disp" style="font-size:1.5rem">R$ 0,00</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="sec">
-    <div class="sec-title"><span>05</span> Academia</div>
-    <div class="bloco">
-      <div class="bchip" id="chip-gym" onclick="togB('gym')"><span class="ic">💪</span><span class="lb">TREINO</span></div>
-      <div class="bpanel off" id="panel-gym">
-        <div class="hora-row">
-          <div class="hf"><label>INÍCIO</label><input type="time" id="gym-ini" oninput="calcHoras()"></div>
-          <div class="hf"><label>FIM</label><input type="time" id="gym-fim" oninput="calcHoras()"></div>
-        </div>
-        <div class="rating" id="r-gym">
-          <div class="ropt" onclick="rate('gym','ruim')">😓</div>
-          <div class="ropt" onclick="rate('gym','medio')">😐</div>
-          <div class="ropt" onclick="rate('gym','bom')">💪</div>
-        </div>
+    <div class="sec">
+      <div class="sec-title">Entradas</div>
+      <div class="fin-input-row">
+        <input type="number" id="f-sal" placeholder="Salário" oninput="saveF()">
+        <input type="number" id="f-ant" placeholder="Anterior" oninput="saveF()">
       </div>
     </div>
-  </div>
 
-  <button class="btn" onclick="analisarDia()">⚡ Analisar dia e recomendar</button>
-  <center><button class="btn-discreto" onclick="addImprevisto()">+ imprevisto (perdi tempo)</button></center>
-</div>
-
-<div class="page" id="page-dinheiro">
-  <div class="sc money" style="margin-bottom:12px;">
-    <div class="sc-label">Saldo Disponível</div>
-    <div class="sc-val money" id="saldo-disp">R$ 0,00</div>
-    <div class="sc-sub" id="saldo-disp-sub">renda do mês</div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-title"><span>01</span> Entradas</div>
-    <div class="fin-row">
-      <div class="fin-field"><label>SALÁRIO</label><input type="number" id="fin-salario" oninput="salvarEntradas()"></div>
-      <div class="fin-field"><label>SALDO ATUAL</label><input type="number" id="fin-anterior" oninput="salvarEntradas()"></div>
+    <div class="sec">
+      <div class="sec-title">Gastos Avulsos</div>
+      <div id="lista-gastos" style="font-size:.8rem;margin-bottom:10px"></div>
+      <div class="fin-input-row">
+        <input type="text" id="g-nome" placeholder="O quê?">
+        <input type="number" id="g-valor" placeholder="R$">
+      </div>
+      <button class="btn btn-a2" onclick="addGasto()">+ LANÇAR GASTO</button>
     </div>
   </div>
-
-  <div class="sec">
-    <div class="sec-title"><span>02</span> Gastos Fixos</div>
-    <div id="fixos-lista"></div>
-    <div class="fin-row" style="margin-top:8px;">
-      <input type="text" id="fixo-desc" placeholder="Ex: Aluguel" style="flex:2; background:var(--bg); border:1px solid var(--b); color:var(--t); padding:8px; border-radius:7px;">
-      <input type="number" id="fixo-val" placeholder="R$" style="flex:1; background:var(--bg); border:1px solid var(--b); color:var(--t); padding:8px; border-radius:7px;">
-    </div>
-    <button class="btn money btn-sm" onclick="addFixo()">+ Adicionar</button>
-  </div>
-
-  <div class="sec">
-    <div class="sec-title"><span>03</span> Metas</div>
-    <div id="metas-lista"></div>
-    <button class="btn money btn-sm" onclick="addMeta()">+ Nova Meta</button>
-  </div>
-
-  <div class="imp-exp">
-    <button class="btn-util export" onclick="exportarTudo()">⇑ Exportar Tudo</button>
-    <button class="btn-util" onclick="importarTudo()">⇓ Importar</button>
-  </div>
-</div>
-
 </main>
+
 <div class="notif" id="notif"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAx_p_gYT_ovyk3YxcwPqHaMQ6x0E7WWCg",
-  authDomain: "pericles-app-b3150.firebaseapp.com",
-  projectId: "pericles-app-b3150",
-  storageBucket: "pericles-app-b3150.firebasestorage.app",
-  messagingSenderId: "20181792548",
-  appId: "1:20181792548:web:2d688300f31427a19e25b1"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const USER = 'pericles';
-
-let state = {
-  fin: {salario:0,anterior:0,fixos:[],metas:[]},
-  hist: [],
-  imprevistoMin: 0
-};
-
 const $ = id => document.getElementById(id);
+let state = { sal:0, ant:0, gastos:[], imp:0 };
 
-// FUNÇÕES GLOBAIS (WINDOW) PARA O HTML ENCONTRAR
-window.go = function(id, btn) {
+window.go = (id,btn) => {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  $('page-'+id).classList.add('active'); btn.classList.add('active');
+  $( 'page-'+id ).classList.add('active');
+  if(id==='dinheiro') renderF();
 };
 
-window.togB = function(id) {
-  const chip=$('chip-'+id), panel=$('panel-'+id);
-  chip.classList.toggle('on');
-  panel.classList.toggle('off');
-  calcHoras();
+window.togB = id => {
+  $('c-'+id).classList.toggle('on');
+  $('p-'+id).classList.toggle('off');
+  calc();
 };
 
-window.rate = function(id, val) {
-  const row=$('r-'+id);
-  row.querySelectorAll('.ropt').forEach(r=>r.classList.remove('sel-ruim','sel-medio','sel-bom'));
-  row.querySelector(`.ropt[onclick*="${val}"]`).classList.add('sel-'+val);
-};
+window.addImp = () => { state.imp += 15; calc(); alert('+15min registrados'); };
 
-window.addImprevisto = function() {
-  state.imprevistoMin += 15;
-  notif(`+15min de imprevisto (${state.imprevistoMin}m total)`);
-  calcHoras();
-};
+const toMin = t => { if(!t)return 0; const[h,m]=t.split(':').map(Number); return h*60+m; };
 
-window.calcHoras = function() {
-  let ocupado = state.imprevistoMin;
-  const add = (id1, id2, chipId) => {
-    if($(chipId).classList.contains('on')) {
-      const v1 = $(id1).value, v2 = $(id2).value;
-      if(v1 && v2) {
-        let d = (toMin(v2) - toMin(v1));
-        if(d < 0) d += 1440; // Caso vire o dia
-        ocupado += d;
-      }
+window.calc = () => {
+  let ocupado = state.imp;
+  const ids = ['sono','t1','gym'];
+  ids.forEach(id => {
+    if($('c-'+id).classList.contains('on')){
+      let d = toMin($(`${id}-f`).value) - toMin($(`${id}-i`).value);
+      if(d<0) d+=1440;
+      ocupado += d;
     }
-  };
-  add('sono-ini','sono-fim','chip-sono');
-  add('t1-ini','t1-fim','chip-t1');
-  add('alm-ini','alm-fim','chip-alm');
-  add('t2-ini','t2-fim','chip-t2');
-  add('gym-ini','gym-fim','chip-gym');
-
-  const total = 1440, livre = Math.max(0, total - ocupado);
-  $('horas-livres').textContent = Math.floor(livre/60) + 'h' + (livre%60) + 'm';
-  $('horas-sub').textContent = Math.floor(ocupado/60) + 'h ocupadas';
+  });
+  let livre = 1440 - ocupado;
+  $('h-livre').textContent = Math.floor(livre/60)+'h'+(livre%60)+'m';
 };
 
-window.exportarTudo = function() {
-  const data = JSON.stringify(state);
-  navigator.clipboard.writeText(data);
-  notif("Copiado! Salve em um bloco de notas.");
+window.addGasto = () => {
+  const n = $('g-nome').value, v = parseFloat($('g-valor').value);
+  if(!n || !v) return;
+  state.gastos.push({n, v});
+  $('g-nome').value=''; $('g-valor').value='';
+  renderF();
 };
 
-window.importarTudo = function() {
-  const data = prompt("Cole o código de exportação aqui:");
-  if(data) {
-    state = JSON.parse(data);
-    renderFin();
-    notif("Dados importados!");
-  }
+window.saveF = () => {
+  state.sal = parseFloat($('f-sal').value) || 0;
+  state.ant = parseFloat($('f-ant').value) || 0;
+  renderF();
 };
 
-window.analisarDia = function() {
-  const rec = $('rec-tempo');
-  rec.classList.add('show');
-  $('rec-tasks').innerHTML = `
-    <div class="task"><div class="task-n">1</div><div class="task-body"><strong>SocialPro</strong><span>Avançar 2 aulas do curso.</span></div></div>
-    <div class="task"><div class="task-n">2</div><div class="task-body"><strong>Estudo PRF</strong><span>Resolver 10 questões de trânsito.</span></div></div>
-  `;
-  notif("Recomendações geradas!");
-};
-
-// UTILS
-function toMin(t){ const[h,m]=t.split(':').map(Number); return h*60+m; }
-function fmtM(v){ return 'R$ ' + parseFloat(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2}); }
-function notif(m){ const n=$('notif'); n.textContent=m; n.classList.add('show'); setTimeout(()=>n.classList.remove('show'),2000); }
-
-async function init() {
-  // Simulação de carregamento Firebase
-  $('sync-dot').className = 'sync-dot loading';
-  setTimeout(() => { $('sync-dot').className = 'sync-dot'; }, 1000);
+function renderF() {
+  const total = state.sal + state.ant;
+  const gastos = state.gastos.reduce((a,b)=>a+b.v, 0);
+  const final = total - gastos;
+  $('s-disp').textContent = 'R$ '+final.toLocaleString();
+  $('s-topo').textContent = 'R$ '+final.toLocaleString();
+  
+  $('lista-gastos').innerHTML = state.gastos.map(g => `<div>${g.n}: -R$ ${g.v}</div>`).join('');
+  drawPizza(gastos, total);
 }
 
-init();
+function drawPizza(g, t) {
+  const c = $('pizza'); const ctx = c.getContext('2d');
+  ctx.clearRect(0,0,80,80);
+  const pct = t > 0 ? (g/t) : 0;
+  // Fundo
+  ctx.beginPath(); ctx.arc(40,40,35,0,7); ctx.strokeStyle='#1e2530'; ctx.lineWidth=8; ctx.stroke();
+  // Gasto
+  ctx.beginPath(); ctx.arc(40,40,35,-1.5, -1.5+(pct*6.3)); ctx.strokeStyle='#ff6b35'; ctx.lineWidth=8; ctx.stroke();
+}
+
+window.analisar = () => {
+  $('rec-box').classList.add('show');
+  $('rec-lista').innerHTML = "• SocialPro: 2 aulas<br>• Estudo PRF: 10 questões";
+};
+
+setInterval(()=>{ const n=new Date(); $('clk').textContent = n.getHours()+':'+String(n.getMinutes()).padStart(2,'0'); },1000);
 </script>
 </body>
 </html>
