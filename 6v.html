@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d0d0f">
 <title>Rotina da Semana — Péricles</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -28,8 +30,13 @@
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+background: #0d0d0f !important;
+color-scheme: dark;
+}
+
 body {
-background: var(–bg);
+background: #0d0d0f !important;
 color: var(–text);
 font-family: ‘DM Sans’, sans-serif;
 min-height: 100vh;
@@ -300,6 +307,40 @@ color: var(–muted);
 }
 
 .resumo-item span { font-size: 0.9rem; }
+
+/* EVENTO CONCLUÍDO */
+.evento.feito .evento-body {
+opacity: 0.35;
+border-left-color: var(–border) !important;
+}
+.evento.feito .evento-icon-wrap {
+opacity: 0.3;
+}
+.evento.feito .evento-hora {
+opacity: 0.3;
+}
+.evento.feito .evento-titulo {
+text-decoration: line-through;
+color: var(–muted);
+}
+.evento.feito .evento-body::after {
+content: ‘✓’;
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 1rem;
+color: var(–work);
+font-weight: 700;
+}
+.evento-body {
+position: relative;
+cursor: pointer;
+user-select: none;
+}
+.evento-body:active {
+transform: scale(0.98);
+}
 
 /* AVISO DESCANSO */
 .descanso-card {
@@ -1168,6 +1209,40 @@ line-height: 1.6;
 </div>
 
 <script>
+  const STORAGE_KEY = 'rotina-pericles-feitos';
+
+  function getFeitos() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } 
+    catch { return {}; }
+  }
+
+  function saveFeitos(obj) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+  }
+
+  function toggleFeito(el) {
+    const evento = el.closest('.evento');
+    if (!evento) return;
+    const id = evento.dataset.id;
+    if (!id) return;
+    const feitos = getFeitos();
+    if (feitos[id]) {
+      delete feitos[id];
+      evento.classList.remove('feito');
+    } else {
+      feitos[id] = true;
+      evento.classList.add('feito');
+    }
+    saveFeitos(feitos);
+  }
+
+  function aplicarFeitos() {
+    const feitos = getFeitos();
+    document.querySelectorAll('.evento[data-id]').forEach(ev => {
+      if (feitos[ev.dataset.id]) ev.classList.add('feito');
+    });
+  }
+
   function showDia(index) {
     document.querySelectorAll('.dia-card').forEach((c, i) => {
       c.classList.toggle('visible', i === index);
@@ -1176,6 +1251,15 @@ line-height: 1.6;
       t.classList.toggle('active', i === index);
     });
   }
+
+  // Atribuir IDs únicos a todos os eventos e adicionar click
+  document.querySelectorAll('.evento').forEach((ev, i) => {
+    ev.dataset.id = 'ev-' + i;
+    const body = ev.querySelector('.evento-body');
+    if (body) body.addEventListener('click', () => toggleFeito(body));
+  });
+
+  aplicarFeitos();
 </script>
 
 </body>
