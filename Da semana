@@ -403,9 +403,9 @@ line-height: 1.6;
     <div class="dia-badge" style="background:rgba(168,85,247,0.15);color:var(--gym)">🦵 LEGS</div>
   </div>
   <div class="resumo">
-    <div class="resumo-item"><span>🦵</span> Legs (1h20)</div>
+    <div class="resumo-item"><span>🏍️</span> Oficina 7h</div>
     <div class="resumo-item"><span>🔧</span> B&R (8h–18h)</div>
-    <div class="resumo-item"><span>🏍️</span> Oficina</div>
+    <div class="resumo-item"><span>🦵</span> Legs noite</div>
     <div class="resumo-item"><span>🎮</span> LOL</div>
   </div>
   <div class="timeline">
@@ -416,35 +416,35 @@ line-height: 1.6;
   <div class="evento-icon-wrap">⏰</div>
   <div class="evento-body">
     <div class="evento-titulo">Acorda</div>
-    <div class="evento-desc">Acorda, escova o dente, prepara pra academia</div>
+    <div class="evento-desc">Acorda, escova dente, se arruma</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">06:10</div>
+  <div class="evento-hora">06:15</div>
   <div class="evento-icon-wrap">☕</div>
   <div class="evento-body">
-    <div class="evento-titulo">Café da manhã leve</div>
-    <div class="evento-desc">Algo rápido antes do treino — fruta, pão, café</div>
+    <div class="evento-titulo">Café da manhã</div>
+    <div class="evento-desc">Café completo — sem treino de manhã hoje</div>
   </div>
 </div>
 
-<div class="evento cat-gym">
-  <div class="evento-hora">06:30</div>
-  <div class="evento-icon-wrap">🦵</div>
+<div class="evento cat-special">
+  <div class="evento-hora">07:00</div>
+  <div class="evento-icon-wrap">🏍️</div>
   <div class="evento-body">
-    <div class="evento-titulo">Academia — Legs</div>
-    <div class="evento-desc">Treino de perna. Academia vazia = bom aproveitamento</div>
-    <div class="evento-duracao">~1h20</div>
+    <div class="evento-titulo">Oficina — Levar a moto</div>
+    <div class="evento-desc">Pedir pra abrir a tampa da embreagem, verificar engrenagem e discos, pegar orçamento</div>
+    <div class="evento-duracao">~45min</div>
   </div>
 </div>
 
 <div class="evento cat-rest">
-  <div class="evento-hora">07:50</div>
-  <div class="evento-icon-wrap">🚿</div>
+  <div class="evento-hora">07:45</div>
+  <div class="evento-icon-wrap">🛵</div>
   <div class="evento-body">
-    <div class="evento-titulo">Banho + se arrumar</div>
-    <div class="evento-desc">Banho pós-treino, troca de roupa pra trabalho</div>
+    <div class="evento-titulo">Mototaxi pra B&R</div>
+    <div class="evento-desc">Sai da oficina com orçamento em mãos</div>
   </div>
 </div>
 
@@ -454,74 +454,65 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal — capricha, dia puxado</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
-<div class="evento cat-special">
-  <div class="evento-hora">18:00</div>
-  <div class="evento-icon-wrap">🏍️</div>
+<div class="evento cat-gym">
+  <div class="evento-hora">19:00</div>
+  <div class="evento-icon-wrap">🦵</div>
   <div class="evento-body">
-    <div class="evento-titulo">Levar moto na oficina</div>
-    <div class="evento-desc">Logo após sair da B&R — teste de compressão e ajuste de válvulas</div>
+    <div class="evento-titulo">Academia — Legs</div>
+    <div class="evento-desc">Treino de perna. Academia vazia à noite = bom aproveitamento</div>
+    <div class="evento-duracao">~1h20</div>
+  </div>
+</div>
+
+<div class="evento cat-rest">
+  <div class="evento-hora">20:25</div>
+  <div class="evento-icon-wrap">🚿</div>
+  <div class="evento-body">
+    <div class="evento-titulo">Chega em casa — Banho</div>
+    <div class="evento-desc">Banho pós-treino, escova dente</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">19:00</div>
+  <div class="evento-hora">20:45</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Jantar</div>
-    <div class="evento-desc">Refeição da noite, descanso após o dia pesado</div>
-  </div>
-</div>
-
-<div class="evento cat-study">
-  <div class="evento-hora">20:00</div>
-  <div class="evento-icon-wrap">📚</div>
-  <div class="evento-body">
-    <div class="evento-titulo">Estudar</div>
-    <div class="evento-desc">Programação, SocialPro ou faculdade — escolhe um pra hoje</div>
-    <div class="evento-duracao">~1h</div>
+    <div class="evento-desc">Refeição pós-treino — capricha na proteína</div>
   </div>
 </div>
 
 <div class="evento cat-rest">
-  <div class="evento-hora">21:00</div>
+  <div class="evento-hora">21:15</div>
   <div class="evento-icon-wrap">🎮</div>
   <div class="evento-body">
     <div class="evento-titulo">LOL com amigos</div>
-    <div class="evento-desc">Único dia da semana com tempo livre à noite. 1–2 partidas (30–40min cada)</div>
+    <div class="evento-desc">Único dia da semana com noite livre. 1–2 partidas</div>
     <div class="evento-duracao">~1h</div>
-  </div>
-</div>
-
-<div class="evento cat-rest">
-  <div class="evento-hora">22:00</div>
-  <div class="evento-icon-wrap">🦷</div>
-  <div class="evento-body">
-    <div class="evento-titulo">Higiene noturna</div>
-    <div class="evento-desc">Escova dente, skincare se tiver, prepara pra dormir</div>
   </div>
 </div>
 
@@ -530,7 +521,7 @@ line-height: 1.6;
   <div class="evento-icon-wrap">🌙</div>
   <div class="evento-body">
     <div class="evento-titulo">Dormir</div>
-    <div class="evento-desc">Acorda às 6h → precisa de pelo menos 7h30 de sono</div>
+    <div class="evento-desc">Dia cheio — merece descanso</div>
   </div>
 </div>
 ```
@@ -578,27 +569,27 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
@@ -658,17 +649,12 @@ line-height: 1.6;
 <div class="dia-card" id="dia-2">
   <div class="dia-header">
     <div class="dia-nome">Quarta-feira</div>
-    <div class="dia-badge" style="background:rgba(168,85,247,0.15);color:var(--gym)">🏋️ LOWER + PULL</div>
+    <div class="dia-badge" style="background:rgba(168,85,247,0.15);color:var(--gym)">🏋️ PULL</div>
   </div>
   <div class="resumo">
-    <div class="resumo-item"><span>🏋️</span> Lower manhã (1h20)</div>
+    <div class="resumo-item"><span>🏋️</span> Pull noite (1h05)</div>
     <div class="resumo-item"><span>🔧</span> B&R (8h–18h)</div>
     <div class="resumo-item"><span>🏪</span> Lucca Sports (18h50–22h)</div>
-    <div class="resumo-item"><span>💪</span> Pull noite (1h05)</div>
-  </div>
-
-  <div style="background:rgba(255,107,71,0.08);border:1px solid rgba(255,107,71,0.3);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:0.78rem;color:#ff6b47;">
-    ⚠️ <strong>Dia mais pesado da semana.</strong> Lower de manhã + Pull à noite. Se sentir que não vai conseguir o Pull, pula e compensa no sábado.
   </div>
 
   <div class="timeline">
@@ -679,35 +665,16 @@ line-height: 1.6;
   <div class="evento-icon-wrap">⏰</div>
   <div class="evento-body">
     <div class="evento-titulo">Acorda</div>
-    <div class="evento-desc">Acorda, escova dente</div>
+    <div class="evento-desc">Acorda, escova dente, se arruma pro trabalho</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">06:10</div>
+  <div class="evento-hora">06:15</div>
   <div class="evento-icon-wrap">☕</div>
   <div class="evento-body">
-    <div class="evento-titulo">Café da manhã leve</div>
-    <div class="evento-desc">Algo antes do treino</div>
-  </div>
-</div>
-
-<div class="evento cat-gym">
-  <div class="evento-hora">06:30</div>
-  <div class="evento-icon-wrap">🏋️</div>
-  <div class="evento-body">
-    <div class="evento-titulo">Academia — Lower</div>
-    <div class="evento-desc">Treino de lower body. Academia vazia de manhã cedo</div>
-    <div class="evento-duracao">~1h20</div>
-  </div>
-</div>
-
-<div class="evento cat-rest">
-  <div class="evento-hora">07:50</div>
-  <div class="evento-icon-wrap">🚿</div>
-  <div class="evento-body">
-    <div class="evento-titulo">Banho + se arrumar</div>
-    <div class="evento-desc">Banho pós-treino</div>
+    <div class="evento-titulo">Café da manhã</div>
+    <div class="evento-desc">Refeição completa — sem treino de manhã hoje</div>
   </div>
 </div>
 
@@ -717,27 +684,27 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal — capricha na proteína</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
@@ -848,27 +815,27 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
@@ -1000,27 +967,27 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
@@ -1080,10 +1047,10 @@ line-height: 1.6;
 <div class="dia-card" id="dia-5">
   <div class="dia-header">
     <div class="dia-nome">Sábado</div>
-    <div class="dia-badge" style="background:rgba(168,85,247,0.15);color:var(--gym)">🏋️ PULL — ÚLTIMO DIA</div>
+    <div class="dia-badge" style="background:rgba(168,85,247,0.15);color:var(--gym)">🏋️ LOWER — ÚLTIMO DIA</div>
   </div>
   <div class="resumo">
-    <div class="resumo-item"><span>🏋️</span> Pull manhã (1h05)</div>
+    <div class="resumo-item"><span>🏋️</span> Lower manhã (1h20)</div>
     <div class="resumo-item"><span>🔧</span> B&R (8h–18h)</div>
     <div class="resumo-item"><span>🏪</span> Lucca Sports (18h50–22h)</div>
     <div class="resumo-item"><span>🎉</span> Fim da semana!</div>
@@ -1113,9 +1080,9 @@ line-height: 1.6;
   <div class="evento-hora">06:30</div>
   <div class="evento-icon-wrap">🏋️</div>
   <div class="evento-body">
-    <div class="evento-titulo">Academia — Pull</div>
+    <div class="evento-titulo">Academia — Lower</div>
     <div class="evento-desc">Último treino da semana. Dá tudo!</div>
-    <div class="evento-duracao">~1h05</div>
+    <div class="evento-duracao">~1h20</div>
   </div>
 </div>
 
@@ -1134,27 +1101,27 @@ line-height: 1.6;
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da manhã</div>
-    <div class="evento-duracao">08:00–12:00</div>
+    <div class="evento-duracao">08:00–13:00</div>
   </div>
 </div>
 
 <div class="evento cat-food">
-  <div class="evento-hora">12:00</div>
+  <div class="evento-hora">13:00</div>
   <div class="evento-icon-wrap">🍽️</div>
   <div class="evento-body">
     <div class="evento-titulo">Almoço</div>
     <div class="evento-desc">Refeição principal — capricha, você merece</div>
-    <div class="evento-duracao">12:00–14:00</div>
+    <div class="evento-duracao">13:00–15:00</div>
   </div>
 </div>
 
 <div class="evento cat-work">
-  <div class="evento-hora">14:00</div>
+  <div class="evento-hora">15:00</div>
   <div class="evento-icon-wrap">🔧</div>
   <div class="evento-body">
     <div class="evento-titulo">B&R Auto Elétrica</div>
     <div class="evento-desc">Expediente da tarde</div>
-    <div class="evento-duracao">14:00–18:00</div>
+    <div class="evento-duracao">15:00–18:00</div>
   </div>
 </div>
 
